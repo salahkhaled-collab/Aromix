@@ -1,0 +1,1458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aromix — Luxury Perfumery</title>
+  <meta name="description"
+    content="Aromix — handcrafted luxury fragrances for men, women, and everyone in between. Discover your signature scent.">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ─── RESET ─── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* ─── BODY ─── */
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(160deg, #faf8f4, #eee9e0);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 6%;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      backdrop-filter: blur(16px);
+      background: rgba(250, 248, 244, 0.92);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    nav h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      letter-spacing: 3px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #888;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #333;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 1px;
+      bottom: -5px;
+      left: 0;
+      background: #8a7440;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .cta {
+      background: #3d3528;
+      color: #e8dcc8;
+      padding: 9px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: 0.3s;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .cta:hover {
+      transform: scale(1.05);
+      background: #524a38;
+    }
+
+    /* ─── HAMBURGER MENU ─── */
+    /* Hamburger is handled by script.js */
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 6% 80px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('665819290_1307372234832945_7975198637622357040_n.jpg') center/cover no-repeat;
+      filter: brightness(0.4) saturate(0.85);
+      z-index: 0;
+      animation: heroZoom 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroZoom {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.08);
+      }
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          rgba(250, 248, 244, 0.15) 0%,
+          rgba(42, 37, 24, 0.4) 50%,
+          rgba(250, 248, 244, 0.98) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 750px;
+      width: 100%;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #c9a96e;
+      margin-bottom: 20px;
+      display: inline-block;
+      padding: 7px 20px;
+      border: 1px solid rgba(201, 169, 110, 0.35);
+      border-radius: 30px;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(38px, 9vw, 80px);
+      line-height: 1.05;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .hero-content h1 em {
+      font-style: italic;
+      color: #c9a96e;
+    }
+
+    .hero-desc {
+      font-size: clamp(14px, 3.5vw, 17px);
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.8;
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 14px 30px;
+      background: #c9a96e;
+      color: #1a1510;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.5px;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.06);
+      box-shadow: 0 10px 40px rgba(201, 169, 110, 0.3);
+    }
+
+    .btn-secondary {
+      padding: 14px 30px;
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: 'Inter', sans-serif;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255, 255, 255, 0.7);
+      transform: scale(1.04);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 1.5s ease both;
+    }
+
+    .hero-scroll .scroll-line {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, rgba(201, 169, 110, 0.6), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scaleY(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scaleY(1.2);
+      }
+    }
+
+    /* ─── MARQUEE ─── */
+    .marquee-bar {
+      background: #1a1710;
+      color: #e8dcc8;
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 22s linear infinite;
+    }
+
+    .marquee-track span {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 0 2rem;
+      opacity: 0.6;
+    }
+
+    .marquee-track .dot {
+      opacity: 0.2;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 80px 6%;
+      text-align: center;
+    }
+
+    .section h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 6vw, 42px);
+      margin-bottom: 12px;
+      color: #2a2518;
+    }
+
+    .section .sub {
+      color: #8a7440;
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    /* ─── GRID ─── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 36px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* ─── CARDS ─── */
+    .card {
+      padding: 0;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(138, 116, 64, 0.06);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      transition: 0.4s;
+      position: relative;
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+      border-color: rgba(138, 116, 64, 0.15);
+    }
+
+    /* ─── COLLECTION CARDS ─── */
+    .col-card {
+      text-align: center;
+      padding: 40px 24px;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .col-icon {
+      font-size: 2.2rem;
+      margin-bottom: 14px;
+    }
+
+    .col-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      margin-bottom: 8px;
+      color: #2a2518;
+    }
+
+    .col-card p {
+      font-size: 13px;
+      color: #8a8070;
+      line-height: 1.7;
+    }
+
+    .col-card .arrow {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: #8a7440;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .col-card:hover .arrow {
+      transform: translateX(6px);
+    }
+
+    /* ─── PRODUCT CARDS ─── */
+    .product-card {
+      cursor: pointer;
+    }
+
+    .product-visual {
+      width: 100%;
+      aspect-ratio: 3/4;
+      border-radius: 20px 20px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      transition: 0.4s;
+    }
+
+    .product-card:hover .product-visual {
+      transform: scale(1.02);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img {
+      transform: scale(1.06);
+    }
+
+    .bg-warm {
+      background: linear-gradient(160deg, #f5ede0, #e8d5b7);
+    }
+
+    .bg-cool {
+      background: linear-gradient(160deg, #dde8f0, #bfd3e8);
+    }
+
+    .bg-rose {
+      background: linear-gradient(160deg, #f5e0e4, #e8c4ca);
+    }
+
+    .bg-sage {
+      background: linear-gradient(160deg, #e8ede4, #d0dcc8);
+    }
+
+    .bg-amber {
+      background: linear-gradient(160deg, #f5eddd, #e8d2a0);
+    }
+
+    .bg-sand {
+      background: linear-gradient(160deg, #ede8df, #d8cfc0);
+    }
+
+    .product-info {
+      padding: 18px 20px 20px;
+    }
+
+    .product-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #b0a898;
+      margin-bottom: 5px;
+    }
+
+    .product-name-txt {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      margin-bottom: 6px;
+      color: #2a2518;
+    }
+
+    .product-desc {
+      font-size: 12px;
+      color: #8a8070;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .product-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .price {
+      font-weight: 600;
+      font-size: 16px;
+      color: #8a7440;
+    }
+
+    .add-btn {
+      padding: 9px 18px;
+      border: none;
+      background: #3d3528;
+      color: #e8dcc8;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      transition: 0.3s;
+    }
+
+    .add-btn:hover {
+      transform: scale(1.08);
+      background: #524a38;
+    }
+
+    /* ─── WHY AROMIX ─── */
+    .why-section {
+      padding: 70px 6%;
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(8px);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 44px;
+    }
+
+    .why-card {
+      text-align: center;
+      padding: 36px 18px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.5);
+      border: 1px solid rgba(138, 116, 64, 0.06);
+      transition: 0.4s;
+    }
+
+    .why-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.06);
+    }
+
+    .why-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #f5ede0, #e8dcc8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      font-size: 1.4rem;
+    }
+
+    .why-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      margin-bottom: 8px;
+      color: #2a2518;
+    }
+
+    .why-card p {
+      font-size: 13px;
+      color: #8a8070;
+      line-height: 1.7;
+    }
+
+    /* ─── STORY ─── */
+    .story-right {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 50px 40px;
+      margin: 0 6% 60px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      border: 1px solid rgba(138, 116, 64, 0.06);
+    }
+
+    .story-right blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(16px, 3vw, 22px);
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .story-right blockquote::before {
+      content: '"';
+      font-size: 60px;
+      color: #ddd;
+      line-height: 0;
+      vertical-align: -1.8rem;
+      margin-right: 4px;
+    }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter {
+      padding: 80px 6%;
+      text-align: center;
+    }
+
+    .newsletter h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px, 6vw, 40px);
+      margin-bottom: 12px;
+      color: #2a2518;
+    }
+
+    .newsletter p {
+      color: #8a8070;
+      font-size: 14px;
+      margin-bottom: 30px;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .nl-form {
+      display: flex;
+      max-width: 460px;
+      margin: 0 auto;
+      border: 1.5px solid rgba(138, 116, 64, 0.15);
+      border-radius: 30px;
+      overflow: hidden;
+      background: white;
+      transition: all 0.3s;
+    }
+
+    .nl-form:focus-within {
+      box-shadow: 0 8px 30px rgba(138, 116, 64, 0.1);
+      border-color: rgba(138, 116, 64, 0.4);
+    }
+
+    .nl-form input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 14px 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      background: transparent;
+      color: #333;
+      min-width: 0;
+    }
+
+    .nl-form input::placeholder {
+      color: #ccc;
+    }
+
+    .nl-form button {
+      background: #3d3528;
+      color: #e8dcc8;
+      border: none;
+      padding: 14px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0 30px 30px 0;
+      font-family: 'Inter', sans-serif;
+      transition: 0.3s;
+      white-space: nowrap;
+    }
+
+    .nl-form button:hover {
+      background: #524a38;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #1a1710;
+      color: white;
+      padding: 60px 6% 36px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 36px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    footer h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
+      margin-bottom: 14px;
+      letter-spacing: 1px;
+    }
+
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      letter-spacing: 4px;
+      margin-bottom: 10px;
+    }
+
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.3);
+      line-height: 1.7;
+      max-width: 220px;
+    }
+
+    footer ul {
+      list-style: none;
+    }
+
+    footer ul li {
+      margin-bottom: 10px;
+    }
+
+    footer ul li a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
+    footer ul li a:hover {
+      color: #c9a96e;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-social a {
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.3);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-social a:hover {
+      color: #c9a96e;
+    }
+
+    /* ─── CART PANEL ─── */
+    .cart-panel {
+      position: fixed;
+      right: -100%;
+      top: 0;
+      width: min(380px, 100%);
+      height: 100%;
+      background: #fff;
+      padding: 28px 24px;
+      transition: 0.4s;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.08);
+      z-index: 2000;
+      overflow-y: auto;
+      border-left: 1px solid rgba(138, 116, 64, 0.08);
+    }
+
+    .cart-panel.active {
+      right: 0;
+    }
+
+    .cart-panel h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 8px;
+      color: #2a2518;
+    }
+
+    .cart-close {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: none;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      color: #aaa;
+      transition: 0.2s;
+    }
+
+    .cart-close:hover {
+      color: #333;
+    }
+
+    .cart-items {
+      margin-top: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0ece6;
+      font-size: 14px;
+      animation: fadeUp 0.3s ease;
+    }
+
+    .cart-item-name {
+      font-weight: 500;
+      color: #2a2518;
+    }
+
+    .cart-item-price {
+      color: #8a8070;
+      font-size: 13px;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #ccc;
+      cursor: pointer;
+      font-size: 16px;
+      transition: color 0.2s;
+    }
+
+    .cart-item-remove:hover {
+      color: #e00;
+    }
+
+    .cart-empty {
+      color: #ccc;
+      font-size: 14px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .cart-total {
+      margin-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 15px;
+      padding-top: 16px;
+      border-top: 1.5px solid #f0ece6;
+      color: #2a2518;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      background: #3d3528;
+      color: #e8dcc8;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: 0.3s;
+    }
+
+    .checkout-btn:hover {
+      background: #524a38;
+      transform: scale(1.02);
+    }
+
+    /* ─── NOTIFICATION ─── */
+    .notif {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #3d3528;
+      color: #e8dcc8;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: 0.3s;
+      z-index: 3000;
+    }
+
+    .notif.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE — TABLET (max 900px)
+    ════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        min-height: 92vh;
+        padding: 90px 6% 70px;
+      }
+
+      .grid-3 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 28px;
+      }
+
+      .story-right {
+        padding: 36px 28px;
+      }
+    }
+
+    /* ════════════════════════════════════════
+       RESPONSIVE — MOBILE (max 640px)
+    ════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      nav {
+        padding: 14px 5%;
+      }
+
+      nav h1 {
+        font-size: 18px;
+        letter-spacing: 2px;
+      }
+
+      /* Hero */
+      .hero {
+        min-height: 100svh;
+        padding: 80px 5% 80px;
+        align-items: flex-end;
+      }
+
+      .hero-content {
+        text-align: center;
+        padding-bottom: 20px;
+      }
+
+      .hero-tag {
+        font-size: 9px;
+        padding: 6px 16px;
+        letter-spacing: 3px;
+      }
+
+      .hero-desc {
+        font-size: 14px;
+        margin-bottom: 28px;
+      }
+
+      .hero-buttons {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary,
+      .btn-secondary {
+        padding: 12px 20px;
+        font-size: 13px;
+      }
+
+      /* Sections */
+      .section {
+        padding: 50px 4%;
+      }
+
+      /* Collections — 2 side by side, 1 below */
+      .grid-3 {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      /* Make the 3rd collection card span full width */
+      .grid-3 .card:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+
+      .col-card {
+        padding: 24px 14px;
+      }
+
+      .col-card h4 {
+        font-size: 15px;
+      }
+
+      .col-card p {
+        font-size: 12px;
+      }
+
+      .col-icon {
+        font-size: 1.8rem;
+      }
+
+      /* Products — 2 side by side */
+      .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .product-visual {
+        aspect-ratio: 3/4;
+      }
+
+      .product-info {
+        padding: 12px 12px 14px;
+      }
+
+      .product-name-txt {
+        font-size: 14px;
+      }
+
+      .product-label {
+        font-size: 9px;
+      }
+
+      .product-desc {
+        font-size: 11px;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .price {
+        font-size: 14px;
+      }
+
+      .add-btn {
+        padding: 7px 12px;
+        font-size: 11px;
+      }
+
+      /* Why section — 2 per row */
+      .why-section {
+        padding: 50px 4%;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .why-card {
+        padding: 22px 12px;
+      }
+
+      .why-card h4 {
+        font-size: 13px;
+      }
+
+      .why-card p {
+        font-size: 11px;
+        line-height: 1.6;
+      }
+
+      .why-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+      }
+
+      /* Story */
+      .story-right {
+        margin: 0 4% 40px;
+        padding: 24px 18px;
+      }
+
+      /* Newsletter */
+      .newsletter {
+        padding: 50px 4%;
+      }
+
+      .nl-form {
+        flex-direction: column;
+        border-radius: 16px;
+        overflow: hidden;
+        max-width: 100%;
+      }
+
+      .nl-form input {
+        padding: 14px 16px;
+        width: 100%;
+      }
+
+      .nl-form button {
+        border-radius: 0 0 16px 16px;
+        padding: 14px;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Footer */
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      .footer-tagline {
+        max-width: 100%;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+      }
+
+      /* Cart */
+      .cart-panel {
+        right: -100%;
+        width: 100%;
+      }
+
+      /* Notification */
+      .notif {
+        bottom: 16px;
+        right: 16px;
+        left: 16px;
+        text-align: center;
+      }
+    }
+
+    /* ── Extra small (max 380px) ── */
+    @media (max-width: 380px) {
+
+      .grid,
+      .grid-3 {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .grid-3 .card:nth-child(3) {
+        grid-column: 1 / -1;
+      }
+
+      .hero-content h1 {
+        font-size: 32px;
+      }
+
+      .product-name-txt {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <h1 onclick="window.scrollTo({top:0,behavior:'smooth'})">Aromix</h1>
+    <div class="nav-links">
+      <a onclick="scrollToSection('collections')">Collections</a>
+      <a href="men.html">Men</a>
+      <a href="women.html">Women</a>
+      <a href="unisex.html">Unisex</a>
+      <a onclick="scrollToSection('newsletter')">Contact</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;margin-left:auto;">
+      <div class="cta" onclick="toggleCart()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e8dcc8" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span id="count">0</span>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-tag">Luxury Perfumery</span>
+      <h1>Discover Your<br><em>Signature Scent</em></h1>
+      <p class="hero-desc">Handcrafted fragrances that tell your story. From bold ouds to delicate florals — find the
+        scent that becomes uniquely yours.</p>
+      <div class="hero-buttons">
+        <button class="btn-primary" onclick="scrollToSection('products')">Explore Collection →</button>
+        <button class="btn-secondary" onclick="scrollToSection('collections')">Shop by Category</button>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>Handcrafted</span><span class="dot">✦</span>
+      <span>100% Authentic</span><span class="dot">✦</span>
+      <span>Long-Lasting</span><span class="dot">✦</span>
+      <span>Premium Ingredients</span><span class="dot">✦</span>
+      <span>Luxury Packaging</span><span class="dot">✦</span>
+      <span>Handcrafted</span><span class="dot">✦</span>
+      <span>100% Authentic</span><span class="dot">✦</span>
+      <span>Long-Lasting</span><span class="dot">✦</span>
+      <span>Premium Ingredients</span><span class="dot">✦</span>
+      <span>Luxury Packaging</span><span class="dot">✦</span>
+    </div>
+  </div>
+
+  <!-- COLLECTIONS -->
+  <section class="section reveal" id="collections">
+    <p class="sub">Explore</p>
+    <h3>Collections</h3>
+    <div class="grid grid-3">
+      <a href="women.html" class="card col-card">
+        <div class="col-icon">🌹</div>
+        <h4>Women Collection</h4>
+        <p>Delicate florals, soft musks and powdery roses crafted for the modern feminine spirit.</p>
+        <span class="arrow">Shop Women →</span>
+      </a>
+      <a href="men.html" class="card col-card">
+        <div class="col-icon">🪵</div>
+        <h4>Men Collection</h4>
+        <p>Bold ouds, cedar and smoky resins — fragrances that command presence and leave a trail.</p>
+        <span class="arrow">Shop Men →</span>
+      </a>
+      <a href="unisex.html" class="card col-card">
+        <div class="col-icon">✨</div>
+        <h4>Unisex Collection</h4>
+        <p>Boundary-free blends of citrus, amber and vetiver made for those who define their own rules.</p>
+        <span class="arrow">Shop Unisex →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- WHY AROMIX -->
+  <div class="why-section reveal">
+    <div style="text-align:center;">
+      <p class="sub" style="color:#8a7440;font-size:11px;letter-spacing:3px;text-transform:uppercase;">Why Choose Us</p>
+      <h3 style="font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,42px);color:#2a2518;margin-bottom:12px;">
+        The Aromix Difference</h3>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">🧪</div>
+        <h4>Premium Oils</h4>
+        <p>Sourced from the finest perfumeries. Every drop is pure, concentrated luxury.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⏱</div>
+        <h4>12h+ Longevity</h4>
+        <p>Our formulas are designed to last from morning to midnight, without reapplication.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">✨</div>
+        <h4>Luxury Packaging</h4>
+        <p>Every bottle is a statement piece — designed to look as beautiful as it smells.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💯</div>
+        <h4>100% Authentic</h4>
+        <p>No imitations. Every fragrance is crafted with genuine, high-quality ingredients.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BEST SELLERS -->
+  <section class="section reveal" id="products">
+    <p class="sub">Best Sellers</p>
+    <h3>Signature Line</h3>
+    <div class="grid">
+
+      <div class="card product-card">
+        <div class="product-visual bg-warm">
+          <img src="Midnight Bloom.jpeg" alt="Midnight Bloom" class="product-img" />
+        </div>
+        <div class="product-info">
+          <p class="product-label">Eau de Parfum · 50ml</p>
+          <p class="product-name-txt">Midnight Bloom</p>
+          <p class="product-desc">
+            Enjoy our soft and elegant scent with notes of fruity florals and warm vanilla.
+            Dupe of Burberry Her
+          </p>
+          <div class="product-row">
+            <span class="price">450 EGP</span>
+            <button class="add-btn" data-name="Midnight Bloom" data-price="450">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card product-card">
+        <div class="product-visual bg-sand">
+          <img src="frosted fire 2.jpeg" alt="Frosted Fire" class="product-img" />
+        </div>
+        <div class="product-info">
+          <p class="product-label">Eau de Parfum · 50ml</p>
+          <p class="product-name-txt">Frosted Fire</p>
+          <p class="product-desc">
+            Enjoy our sweet and cozy scent with notes of cupcakes, vanilla, and warm sugary cream.
+            Dupe of Stronger With You Intensely
+          </p>
+          <div class="product-row">
+            <span class="price">450 EGP</span>
+            <button class="add-btn" data-name="Frosted Fire" data-price="450">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card product-card">
+        <div class="product-visual bg-rose">
+          <img src="Sucre.jpeg" alt="Sucre 09" class="product-img" />
+        </div>
+        <div class="product-info">
+          <p class="product-label">Eau de Parfum · 50ml</p>
+          <p class="product-name-txt">Sucre 09</p>
+          <p class="product-desc">
+            Enjoy our sweet and creamy scent with notes of vanilla and caramel.
+            Dupe of Bianco Latte.
+          </p>
+          <div class="product-row">
+            <span class="price">450 EGP</span>
+            <button class="add-btn" data-name="Sucre 09" data-price="450">Add</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STORY QUOTE -->
+  <div class="story-right reveal">
+    <blockquote>A fragrance is like a signature — invisible, yet unforgettable. At Aromix, we help you write yours —
+      without the luxury price tag.
+    </blockquote>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter reveal" id="newsletter">
+    <p class="sub" style="color:#8a7440;font-size:11px;letter-spacing:3px;text-transform:uppercase;">Stay Close</p>
+    <h3>Join the Inner Circle</h3>
+    <p>Early access to new collections, exclusive events, and the art of perfumery — delivered to you.</p>
+    <div class="nl-form">
+      <input type="email" placeholder="Your email address" id="nlEmail">
+      <button onclick="subscribe()">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">AROMIX</div>
+        <p class="footer-tagline">Handcrafted in Grasse, worn at the world's finest tables.</p>
+      </div>
+      <div>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/aromix_eg?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
+            Target="_blank">Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 Aromix Parfums. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- CART -->
+  <div class="cart-panel" id="cartPanel">
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+    <h3>Your Cart</h3>
+    <div class="cart-items" id="cartItems">
+      <p class="cart-empty" id="cartEmpty">Your cart is empty.</p>
+    </div>
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="total">0 EGP</span>
+    </div>
+    <button class="checkout-btn" onclick="checkout()">Checkout →</button>
+  </div>
+
+  <!-- NOTIFICATION -->
+  <div class="notif" id="notif">Added to cart ✓</div>
+
+  <script src="script.js"></script>
+  <script>
+    // ─── NAV SCROLL SHADOW ───
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ─── SCROLL REVEAL ───
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+  </script>
+
+</body>
+
+</html>
